@@ -1,0 +1,70 @@
+﻿@*
+     Layout = "~/Views/Shared/_Layout.cshtml";  
+*@
+@using System.Data;
+@model DataTable;
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8"><h2><b>Country List</b></h2></div>
+            <div class="col-sm-4">
+                <a type="button" class="btn btn-primary" asp-action="Country_Add" asp-controller="LOC_Country" asp-area="LOC_Country"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+        </div>
+        <div class="datatable-top">
+            <div class="datatable-dropdown">
+                <label>
+                    <select class="datatable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page
+                </label>
+            </div>
+            <div class="datatable-search">
+                <input class="datatable-input" placeholder="Search..." type="search" title="Search within table">
+            </div>
+        </div>
+
+        <!-- Table with stripped rows -->
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Country Id</th>
+                    <th scope="col">Country Name</th>
+                    <th scope="col">Country Code</th>
+                    <th scope="col">Action</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                  @foreach(DataRow dr in Model.Rows){
+                <tr>
+                    <th scope="row">1</th>
+                        <td>
+                            @dr["CountryID"]
+                        </td>
+                        <td>
+                            @dr["CountryName"]
+                        </td>
+                        <td>
+                            @dr["CountryCode"]
+                        </td>
+                        <td>
+                            @*  <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit" ><i class="material-icons"></i></a> *@
+                            <form method="post" asp-controller="LOC_Country" asp-action="Delete">
+                                <input type="hidden" name="id" value="@dr["CountryID"]">
+                                <button type="submit" class="material-icons" onclick="Delete"></button>
+                            </form>
+
+                            <form method="post" asp-areas="LOC_Country" asp-controller="LOC_Country" asp-action="Country_Add">
+                                <input type="hidden" name="id" value="@dr["CountryID"]">
+                                <button type="submit" class="material-icons"><i class="material-icons"></i></button>
+                            </form>
+                            </td>
+                </tr>
+                  }
+            </tbody>
+        </table>
+        <!-- End Table with stripped rows -->
+
+    </div>
+</div>
+

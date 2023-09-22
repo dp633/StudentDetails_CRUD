@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model StudentDetails.Areas.LOC_City.Models.CityModel;
+
+    <h3>@TempData["CityInsertMsg"]</h3>
+
+    <form method="post" asp-controller="LOC_City" asp-action="AddCity">
+        @Html.HiddenFor(X=>X.CityID)
+        @* <input type="hidden" asp-for="CountryID" /> *@
+        <a class="btn btn-info add-new" type="submit" style="float:right" asp-action="CityAddEdit" asp-controller="LOC_City" asp-area="LOC_City">Back To List</a>
+        <br />
+        
+        <div class="form-group">
+            <label>City Name</label>
+            <input type="text" class="form-control" id="CName" placeholder="Enter City Name" asp-for="CityName">
+        </div>
+
+        <div class="form-group">
+            <label>City Code</label>
+            <input type="number" class="form-control" id="CCode" placeholder="Enter City Code" asp-for="CityCode">
+
+        </div>
+
+        @* <div class="form-group">
+            <label>State ID</label>
+            <input type="number" class="form-control" id="SID" placeholder="Enter State ID" asp-for="StateID">
+
+        </div> *@
+
+        @* <div class="form-group">
+            <label>Country ID</label>
+            <input type="number" class="form-control" id="CID" placeholder="Enter Country ID" asp-for="CountryID">
+
+        </div>  *@
+
+        <div class="row mb-4">
+            <label class="col-sm-8" col-form-label>Select State</label>
+            <select class="form-control" asp-for="StateID"
+                asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+
+            <option disabled selected>Select State</option>
+            </select>
+            <span asp-validation-for="StateID" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="row mb-4">
+            <label class="col-sm-8" col-form-label>Select Country</label>
+            <select class="form-control" asp-for="CountryID"
+                asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+
+                <option disabled selected>Select Country</option>
+            </select>
+            <span asp-validation-for="CountryID" class="text-danger"></span>
+        </div>
+
+
+        <br />
+        <input  type="submit" class="btn btn-info add-new" style="color:white" value="submit" />
+    </form>
+
+   
+

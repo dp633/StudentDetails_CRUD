@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model StudentDetails.Areas.LOC_Branch.Models.BranchModel;
+
+<h3>@TempData["BranchInsertMsg"]</h3>
+<form method="post" asp-controller="LOC_Branch" asp-action="AddBranch">
+    @Html.HiddenFor(X=>X.BranchID)
+    @* <input type="hidden" asp-for="BranchID" /> *@
+    <a class="btn btn-info add-new" type="submit" style="float:right" asp-action="BranchAddEdit" asp-controller="LOC_Branch" asp-area="LOC_Branch">Back To List</a>
+    <br />
+
+    <div class="form-group">
+        <label>Branch Name</label>
+        <input type="text" class="form-control" id="CName" placeholder="Enter Branch Name" asp-for="BranchName">
+    </div>
+
+    <div class="form-group">
+        <label>Branch Code</label>
+        <input type="number" class="form-control" id="CId" placeholder="Enter Branch Code" asp-for="BranchCode">
+
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-info add-new" style="color:white" value="submit" />
+</form>
+

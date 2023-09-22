@@ -1,0 +1,98 @@
+﻿@*
+     Layout = "~/Views/Shared/_Layout.cshtml";
+*@
+@using System.Data;
+@model DataTable;
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8"><h2><b>Student List</b></h2></div>
+            <div class="col-sm-4">
+                <a type="button" class="btn btn-primary" asp-action="StudentAddEdit" asp-controller="LOC_Student" asp-area="LOC_Student"><i class="fa fa-plus"></i> Add New</a>
+            </div>
+        </div>
+        <div class="datatable-top">
+        <div class="datatable-top">
+            <div class="datatable-dropdown">
+                <label>
+                    <select class="datatable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page
+                </label>
+            </div>
+            <div class="datatable-search">
+                <input class="datatable-input" placeholder="Search..." type="search" title="Search within table">
+            </div>
+        </div>
+
+        <!-- Table with stripped rows -->
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Branch ID</th>
+                    <th scope="col">City ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Mobile No Student</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Mobile No Father</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">IsActive</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Action</th>                
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow dr in Model.Rows)
+                {
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            @dr["StudentID"]
+                        </td>
+                        <td>
+                            @dr["BranchID"]
+                        </td>
+                        <td>
+                            @dr["CityID"]
+                        </td>
+                        <td>
+                            @dr["StudentName"]
+                        </td>
+                        <td>
+                            @dr["MobileNoStudent"]
+                        </td>
+                        <td>
+                            @dr["Email"]
+                        </td>
+                        <td>
+                            @dr["MobileNoFather"]
+                        </td>
+
+                        <td>
+                            @dr["Age"]
+                        </td>
+                        <td>
+                            @dr["IsActive"]
+                        </td>
+                        <td>
+                            @dr["Gender"]
+                        </td>
+                        <td>
+                            @*  <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit" ><i class="material-icons"></i></a> *@
+                            <form method="post" asp-controller="LOC_Student" asp-action="Delete">
+                                <input type="hidden" name="id" value="@dr["StudentID"]">
+                                <button type="submit" class="material-icons" onclick="Delete"></button>
+                            </form>
+
+                            <form method="post" asp-areas="LOC_Student" asp-controller="LOC_Student" asp-action="StudentAddEdit">
+                                <input type="hidden" name="StudentID" value="@dr["StudentID"]">
+                                <button type="submit" class="material-icons"><i class="material-icons"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- End Table with stripped rows -->
+
+    </div>
+</div>

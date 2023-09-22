@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model StudentDetails.Areas.LOC_Country.Models.CountryModel;
+
+    <h3>@TempData["CountryInsertMsg"]</h3>
+    <form method="post" asp-controller="LOC_Country" asp-action="AddCountry">
+        @Html.HiddenFor(X=>X.CountryID)
+        @* <input type="hidden" asp-for="CountryID" /> *@
+        <a class="btn btn-info add-new" type="submit" style="float:right" asp-action="CountrySelectAll" asp-controller="LOC_Country" asp-area="LOC_Country">Back To List</a>
+        <br />
+        
+        <div class="form-group">
+            <label>Country Name</label>
+            <input type="text" class="form-control" id="CName" placeholder="Enter Country Name" asp-for="CountryName">
+        </div>
+
+        <div class="form-group">
+            <label>Country Code</label>
+            <input type="number" class="form-control" id="CId" placeholder="Enter Country Code" asp-for="CountryCode">
+
+        </div>
+
+        <br />
+        <input  type="submit" class="btn btn-info add-new" style="color:white" value="submit" />
+    </form>

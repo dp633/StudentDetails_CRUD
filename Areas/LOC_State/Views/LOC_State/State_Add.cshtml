@@ -1,0 +1,42 @@
+﻿@model StudentDetails.Areas.LOC_State.Models.StateModel;
+<html>
+<head>
+</head>
+<body>
+    <h3>@TempData["CountryInsertMsg"]</h3>
+    <form method="post" asp-controller="LOC_State" asp-action="AddState" asp-area="LOC_State">
+        @Html.HiddenFor(X=>X.StateID)
+        @* <input type="hidden" asp-for="CountryID" /> *@
+        <a class="btn btn-info add-new" type="submit" style="float:right" asp-action="StateAddEdit" asp-controller="LOC_State">Back To List</a>
+        <br />
+
+        <div class="row mb-4">
+            <label class="col-sm-8" col-form-label>Select Country</label>
+            <select class="form-control" asp-for="CountryID"
+                    asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+
+                <option disabled selected>Select Country</option>
+            </select>
+            <span asp-validation-for="CountryID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>State Name</label>
+            <input type="text" class="form-control" id="SName" placeholder="Enter State Name" asp-for="StateName">
+        </div>
+        @* <div class="form-group">
+            <label>Country ID</label>
+            <input type="text" class="form-control" id="CID" placeholder="Enter Country ID" asp-for="CountryID">
+        </div> *@
+
+        <div class="form-group">
+            <label>State Code</label>
+            <input type="number" class="form-control" id="SCode" placeholder="Enter State Code" asp-for="StateCode">
+
+        </div>
+
+        <br />
+        <input type="submit" class="btn btn-info add-new" style="color:white" value="submit" />
+    </form>
+</body>
+</html>
